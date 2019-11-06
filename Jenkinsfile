@@ -33,5 +33,27 @@ pipeline
 				build job: 'deploy_to_staging'
             }
         }
+		stage('Deploy to Production')
+		{
+			steps
+			{
+				timeout(time:5, unit:'DAYS')
+				{
+					input message:'Approve PRODUCTION Deployement ?'
+				}
+				build job: 'deploy_to_prod'
+			}
+			post
+			{
+				success
+				{
+					echo 'Code Deployed To Production'
+				}
+				failure
+				{
+					echo 'Depoyement failed'
+				}				
+			}
+		}
     }
 }
