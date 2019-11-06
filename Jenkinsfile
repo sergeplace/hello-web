@@ -12,19 +12,19 @@ pipeline
         }
         stage('Build')
         {
-		steps
-	        {
-			bat "mvn clean package"
-        	}
-		post
-		{
-			success
+			steps
 			{
-				echo "Now Archiving ..."
-				archiveArtifacts artifacts: "**/target/*.war"
+				bat "mvn clean package"
+			}
+			post
+			{
+				success
+				{
+					echo "Now Archiving ..."
+					archiveArtifacts artifacts: '**/target/*.war'
+				}
 			}
 		}
-        }
         stage('Deploy')
         {
             steps
