@@ -25,11 +25,12 @@ pipeline
 				}
 			}
 		}
-        stage('Deploy')
+        stage('Deploy to Staging')
         {
             steps
             {
                 echo "Code Deployed."
+				build job: 'deploy_to_staging'
             }
         }
     }
